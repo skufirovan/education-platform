@@ -1,0 +1,37 @@
+.lessonHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lessonTitle {
+  margin: 0;
+  color: #1f2937;
+  font:
+    700 24px/32px 'Inter',
+    sans-serif;
+}
+
+.lessonMetaRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lessonMetaItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.lessonMetaIcon {
+  font-size: 16px;
+}
+
+.lessonMetaText,
+.emptyLesson {
+  color: #6b7280;
+  font:
+    400 14px/20px 'Inter',
+    sans-serif;
+}

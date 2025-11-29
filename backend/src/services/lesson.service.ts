@@ -30,7 +30,6 @@ export class LessonService {
         type: data.type,
         orderIndex: data.orderIndex,
         durationMinutes: data.durationMinutes || null,
-        contentUrl: data.contentUrl || null,
       },
     });
   }

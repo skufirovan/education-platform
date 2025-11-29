@@ -1,0 +1,37 @@
+.button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+  font:
+    500 14px/20px 'Inter',
+    sans-serif;
+  white-space: nowrap;
+  border: none;
+  border-radius: 8px;
+  transition:
+    background-color 0.15s ease,
+    transform 0.05s ease;
+}
+
+.button:active {
+  transform: translateY(-1px);
+}
+
+.primary {
+  color: #ffffff;
+  background: #6b46c1;
+}
+
+.primary:hover {
+  background: #5833aa;
+}
+
+.secondary {
+  color: #ffffff;
+  background: #ff6b35;
+}
+
+.secondary:hover {
+  background: #e35a27;
+}

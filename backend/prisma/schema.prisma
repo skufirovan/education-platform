@@ -96,7 +96,6 @@ model Lesson {
   type            LessonType
   orderIndex      Int
   durationMinutes Int?
-  contentUrl      String?
 
   module     Module           @relation(fields: [moduleId], references: [id], onDelete: Cascade)
   materials  LessonMaterial[]
@@ -112,14 +111,13 @@ model Lesson {
 }
 
 model LessonMaterial {
-  id          String       @id @default(uuid())
-  lessonId    String
-  title       String
-  type        MaterialType
-  fileUrl     String?
-  externalUrl String?
+  id       String       @id @default(uuid())
+  lessonId String
+  title    String
+  type     MaterialType
 
-  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  lesson     Lesson      @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  attachment Attachment?
 
   createdByTeacherId String?
   createdByTeacher   Teacher? @relation(fields: [createdByTeacherId], references: [id])
@@ -268,7 +266,9 @@ model Attachment {
 
   uploadedByTeacher      Teacher?              @relation(fields: [uploadedByTeacherId], references: [id])
   uploadedByStudent      Student?              @relation(fields: [uploadedByStudentId], references: [id])
-  assignmentSubmission   AssignmentSubmission? @relation(fields: [assignmentSubmissionId], references: [id])
+  lessonMaterial         LessonMaterial?       @relation(fields: [lessonMaterialId], references: [id], onDelete: Cascade)
+  lessonMaterialId       String?               @unique
+  assignmentSubmission   AssignmentSubmission? @relation(fields: [assignmentSubmissionId], references: [id], onDelete: Cascade)
   assignmentSubmissionId String?
 
   @@index([uploadedByTeacherId])

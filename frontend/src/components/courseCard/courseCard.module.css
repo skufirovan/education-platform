@@ -1,0 +1,133 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.title {
+  margin: 0;
+  color: #1f2937;
+  font:
+    600 18px/22px 'Inter',
+    sans-serif;
+}
+
+.dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  margin-top: 4px;
+  background: #ff6b35;
+  border-radius: 50%;
+}
+
+.description,
+.metaRow,
+.progressBlock,
+.deadlineRow {
+  color: #6b7280;
+  font:
+    400 14px/20px 'Inter',
+    sans-serif;
+}
+
+.metaRow {
+  display: flex;
+  margin-top: 4px;
+}
+
+.metaItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #4b5563;
+  font-size: 13px;
+}
+
+.metaIcon {
+  font-size: 16px;
+}
+
+.metaText {
+  font-size: 13px;
+}
+
+.progressBlock {
+  margin-top: 8px;
+}
+
+.progressHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.progressLabel {
+  font-size: 12px;
+}
+
+.progressValue {
+  color: #f97316;
+  font-weight: 500;
+}
+
+.progressBar {
+  width: 100%;
+  height: 6px;
+  overflow: hidden;
+  background: #e5e7eb;
+  border-radius: 9999px;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #f97316, #fb923c);
+  border-radius: inherit;
+}
+
+.deadlineRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  color: #4b5563;
+  font-size: 13px;
+}
+
+.deadlineIcon {
+  font-size: 16px;
+}
+
+.deadlineText {
+  font-size: 13px;
+}
+
+.deadlineDate {
+  color: #111827;
+  font-weight: 600;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.fullWidthButton {
+  width: 100%;
+}

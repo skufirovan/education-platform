@@ -1,10 +1,12 @@
 import { useEffect } from 'react'
-import { Header } from '@/component/header/Header'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import { useTeacherCoursesStore } from '@/shared/store/courses'
 import { useCurrentUserStore } from '@/shared/store/currentUser'
-// import s from './appLayout.module.css'
+import { RootLayout } from './layouts/rootLayout/RootLayout'
+import { CoursesPage } from './pages/coursesPage/CoursesPage'
+import { CoursePage } from './pages/coursePage/CoursePage'
 
-export const AppLayout = () => {
+export const App = () => {
   const { user, isLoading, error, fetchMe } = useCurrentUserStore()
   const { fetchCourses } = useTeacherCoursesStore()
 
@@ -24,5 +26,13 @@ export const AppLayout = () => {
   if (error) return <p>Ошибка загрузки /me: {error}</p>
   if (!user) return <p>Пользователь не найден</p>
 
-  return <Header />
+  return (
+    <Routes>
+      <Route path='/' element={<RootLayout />}>
+        <Route index element={<Navigate to='/courses' />} />
+        <Route path='/courses' element={<CoursesPage />} />
+        <Route path='/courses/:id' element={<CoursePage />} />
+      </Route>
+    </Routes>
+  )
 }

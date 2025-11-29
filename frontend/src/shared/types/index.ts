@@ -11,6 +11,7 @@ export interface Course {
   createdAt: string
   updatedAt: string
   modules: CourseModule[]
+  enrollments: CourseEnrollment[]
 }
 
 export interface CourseModule {
@@ -23,7 +24,31 @@ export interface CourseModule {
 
 export interface Lesson {
   id: string
+  moduleId: string
   title: string
-  type: 'video' | 'article' | 'test' | 'assignment'
+  type: 'VIDEO' | 'ARTICLE' | 'TEST' | 'ASSIGNMENT'
   orderIndex: number
+  durationMinutes?: number
+  materials: LessonMaterial[]
+}
+
+export interface LessonMaterial {
+  id: string
+  lessonId: string
+  title: string
+  type: 'FILE' | 'LINK'
+  attachment: Attachment | null
+}
+
+export interface Attachment {
+  id: string
+  url: string
+  filename: string
+  mimeType?: string | null
+}
+
+interface CourseEnrollment {
+  courseId: string
+  studentId: string
+  enrolledAt: string
 }

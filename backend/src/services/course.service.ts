@@ -33,8 +33,14 @@ export class CourseService {
       include: {
         modules: {
           orderBy: { orderIndex: "asc" },
-          include: { lessons: { orderBy: { orderIndex: "asc" } } },
+          include: {
+            lessons: {
+              include: { materials: { include: { attachment: true } } },
+              orderBy: { orderIndex: "asc" },
+            },
+          },
         },
+        enrollments: true,
       },
       orderBy: { createdAt: "desc" },
     });

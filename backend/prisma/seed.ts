@@ -35,15 +35,46 @@ async function main() {
                   title: "Что такое интернет",
                   type: "ARTICLE",
                   orderIndex: 1,
-                  contentUrl: "https://example.com/lesson1",
                   createdByTeacherId: teacher.id,
+                  materials: {
+                    create: [
+                      {
+                        title: "Статья на Habr",
+                        type: "LINK",
+                        createdByTeacherId: teacher.id,
+                        attachment: {
+                          create: {
+                            url: "https://habr.com/articles/internet-intro",
+                            filename: "Habr Article",
+                            uploadedByTeacherId: teacher.id,
+                          },
+                        },
+                      },
+                    ],
+                  },
                 },
                 {
                   title: "Как работает браузер",
                   type: "ARTICLE",
                   orderIndex: 2,
-                  contentUrl: "https://example.com/lesson2",
                   createdByTeacherId: teacher.id,
+                  materials: {
+                    create: [
+                      {
+                        title: "Конспект",
+                        type: "FILE",
+                        createdByTeacherId: teacher.id,
+                        attachment: {
+                          create: {
+                            url: "https://example.com/browser-guide.pdf",
+                            filename: "browser-guide.pdf",
+                            mimeType: "application/pdf",
+                            uploadedByTeacherId: teacher.id,
+                          },
+                        },
+                      },
+                    ],
+                  },
                 },
               ],
             },
@@ -58,15 +89,60 @@ async function main() {
                   title: "HTML теги",
                   type: "ARTICLE",
                   orderIndex: 1,
-                  contentUrl: "https://example.com/lesson3",
                   createdByTeacherId: teacher.id,
+                  materials: {
+                    create: [
+                      {
+                        title: "Справочник тегов",
+                        type: "LINK",
+                        createdByTeacherId: teacher.id,
+                        attachment: {
+                          create: {
+                            url: "https://developer.mozilla.org/en-US/docs/Web/HTML/Element",
+                            filename: "MDN HTML Reference",
+                            uploadedByTeacherId: teacher.id,
+                          },
+                        },
+                      },
+                      {
+                        title: "Примеры кода",
+                        type: "FILE",
+                        createdByTeacherId: teacher.id,
+                        attachment: {
+                          create: {
+                            url: "https://example.com/html-examples.zip",
+                            filename: "html-examples.zip",
+                            mimeType: "application/zip",
+                            uploadedByTeacherId: teacher.id,
+                          },
+                        },
+                      },
+                    ],
+                  },
                 },
                 {
                   title: "Формы и ввод данных",
                   type: "ARTICLE",
                   orderIndex: 2,
-                  contentUrl: "https://example.com/lesson4",
                   createdByTeacherId: teacher.id,
+                  materials: {
+                    create: [
+                      {
+                        title: "Презентация",
+                        type: "FILE",
+                        createdByTeacherId: teacher.id,
+                        attachment: {
+                          create: {
+                            url: "https://example.com/forms-presentation.pptx",
+                            filename: "forms-presentation.pptx",
+                            mimeType:
+                              "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+                            uploadedByTeacherId: teacher.id,
+                          },
+                        },
+                      },
+                    ],
+                  },
                 },
               ],
             },
@@ -81,15 +157,46 @@ async function main() {
                   title: "Основы CSS",
                   type: "ARTICLE",
                   orderIndex: 1,
-                  contentUrl: "https://example.com/lesson5",
                   createdByTeacherId: teacher.id,
+                  materials: {
+                    create: [
+                      {
+                        title: "Видеотуториал",
+                        type: "LINK",
+                        createdByTeacherId: teacher.id,
+                        attachment: {
+                          create: {
+                            url: "https://youtube.com/css-basics",
+                            filename: "CSS Basics Tutorial",
+                            uploadedByTeacherId: teacher.id,
+                          },
+                        },
+                      },
+                    ],
+                  },
                 },
                 {
                   title: "Flexbox и Grid",
                   type: "ARTICLE",
                   orderIndex: 2,
-                  contentUrl: "https://example.com/lesson6",
                   createdByTeacherId: teacher.id,
+                  materials: {
+                    create: [
+                      {
+                        title: "Практические примеры",
+                        type: "FILE",
+                        createdByTeacherId: teacher.id,
+                        attachment: {
+                          create: {
+                            url: "https://example.com/flexbox-grid-examples.html",
+                            filename: "flexbox-grid-examples.html",
+                            mimeType: "text/html",
+                            uploadedByTeacherId: teacher.id,
+                          },
+                        },
+                      },
+                    ],
+                  },
                 },
               ],
             },
@@ -100,7 +207,15 @@ async function main() {
     include: {
       modules: {
         include: {
-          lessons: true,
+          lessons: {
+            include: {
+              materials: {
+                include: {
+                  attachment: true,
+                },
+              },
+            },
+          },
         },
       },
     },
@@ -112,7 +227,6 @@ async function main() {
 main()
   .catch((e) => {
     console.error("Seed error:", e);
-    process.exit(1);
   })
   .finally(async () => {
     await prisma.$disconnect();

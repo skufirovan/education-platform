@@ -1,0 +1,80 @@
+.modulesList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.moduleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.moduleHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.moduleIndex {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  color: white;
+  font:
+    500 12px/16px 'Inter',
+    sans-serif;
+  background: #6b46c1;
+  border-radius: 50%;
+}
+
+.moduleInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.moduleTitle {
+  margin: 0;
+  color: #1f2937;
+  font:
+    500 16px/24px 'Inter',
+    sans-serif;
+}
+
+.lessonsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-left: 32px;
+}
+
+.lessonButton {
+  width: 100%;
+  padding: 12px;
+  color: #1f2937;
+  font:
+    500 14px/20px 'Inter',
+    sans-serif;
+  text-align: left;
+  background: #f8f9ff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background-color 0.12s ease,
+    border-color 0.12s ease;
+}
+
+.lessonButton:hover {
+  background: #f3f4f6;
+}
+
+.lessonButtonActive {
+  background: #ede9fe;
+  border-color: #6b46c1;
+}

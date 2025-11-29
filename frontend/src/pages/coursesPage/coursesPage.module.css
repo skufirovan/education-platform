@@ -1,0 +1,44 @@
+.page {
+  padding: 24px 32px;
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.title {
+  margin: 0;
+  color: #1f2937;
+  font:
+    700 30px/36px 'Inter',
+    sans-serif;
+}
+
+.coursesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  gap: 24px;
+}
+
+.emptyState {
+  margin-top: 40px;
+  color: #6b7280;
+  font:
+    700 30px/36px 'Inter',
+    sans-serif;
+}
+
+.loader,
+.error {
+  padding: 24px 32px;
+  font:
+    500 24px/32px 'Inter',
+    sans-serif;
+}
+
+.error {
+  color: #b91c1c;
+}

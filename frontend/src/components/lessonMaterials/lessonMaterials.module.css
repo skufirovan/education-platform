@@ -1,0 +1,98 @@
+.materialsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.materialsTitle {
+  margin: 0 0 4px;
+  color: #1f2937;
+  font:
+    600 18px/28px 'Inter',
+    sans-serif;
+}
+
+.noMaterials {
+  margin: 8px 0 0;
+  color: #6b7280;
+  font:
+    400 16px/24px 'Inter',
+    sans-serif;
+}
+
+.materialsList {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.materialRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 15px 8px 13px;
+  font:
+    400 16px/24px 'Inter',
+    sans-serif;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  transition: all 0.12s ease;
+}
+
+.materialRow:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.materialLeft {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.materialIcon {
+  flex-shrink: 0;
+  font-size: 20px;
+}
+
+.materialInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.materialTitle {
+  display: block;
+  color: #1f2937;
+}
+
+.linkButton {
+  display: inline-flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  margin-left: 8px;
+  padding: 8px 10px;
+  color: white;
+  white-space: nowrap;
+  text-decoration: none;
+  background: #6b46c1;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.linkButton:hover {
+  background: #5833aa;
+}
+
+.uploadTitle {
+  margin: 0;
+  font:
+    400 16px/24px 'Inter',
+    sans-serif;
+}

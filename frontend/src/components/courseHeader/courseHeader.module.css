@@ -1,0 +1,27 @@
+.courseHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.courseTitle {
+  margin: 0;
+  color: #1f2937;
+  font:
+    600 20px/28px 'Inter',
+    sans-serif;
+}
+
+.studentsRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #6b7280;
+  font:
+    400 14px/20px 'Inter',
+    sans-serif;
+}
+
+.studentsIcon {
+  font-size: 16px;
+}
