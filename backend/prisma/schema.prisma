@@ -1,0 +1,306 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Teacher {
+  id        String   @id @default(uuid())
+  fullName  String
+  email     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  coursesTeaching    CourseTeacher[]
+  assignmentsCreated Assignment[]           @relation("AssignmentCreatedBy")
+  testsCreated       Test[]                 @relation("TestCreatedBy")
+  submissionsGraded  AssignmentSubmission[] @relation("AssignmentGradedBy")
+  attemptsGraded     TestAttempt[]          @relation("TestGradedBy")
+
+  comments        Comment[]
+  lessons         Lesson[]
+  lessonMaterials LessonMaterial[]
+  attachments     Attachment[]
+}
+
+model Student {
+  id        String   @id @default(uuid())
+  fullName  String
+  email     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  enrollments           CourseEnrollment[]
+  assignmentSubmissions AssignmentSubmission[]
+  testAttempts          TestAttempt[]
+
+  comments    Comment[]
+  attachments Attachment[]
+}
+
+model Course {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  modules     Module[]
+  enrollments CourseEnrollment[]
+  teachers    CourseTeacher[]
+}
+
+model CourseEnrollment {
+  courseId   String
+  studentId  String
+  enrolledAt DateTime @default(now())
+
+  course  Course  @relation(fields: [courseId], references: [id])
+  student Student @relation(fields: [studentId], references: [id])
+
+  @@unique([courseId, studentId])
+}
+
+model CourseTeacher {
+  courseId  String
+  teacherId String
+
+  course  Course  @relation(fields: [courseId], references: [id])
+  teacher Teacher @relation(fields: [teacherId], references: [id])
+
+  @@unique([courseId, teacherId])
+}
+
+model Module {
+  id          String  @id @default(uuid())
+  courseId    String
+  title       String
+  description String?
+  orderIndex  Int
+
+  course  Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  lessons Lesson[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Lesson {
+  id              String     @id @default(uuid())
+  moduleId        String
+  title           String
+  type            LessonType
+  orderIndex      Int
+  durationMinutes Int?
+  contentUrl      String?
+
+  module     Module           @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  materials  LessonMaterial[]
+  assignment Assignment?
+  test       Test?
+
+  createdByTeacherId String?
+  createdByTeacher   Teacher? @relation(fields: [createdByTeacherId], references: [id])
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  comments  Comment[]
+}
+
+model LessonMaterial {
+  id          String       @id @default(uuid())
+  lessonId    String
+  title       String
+  type        MaterialType
+  fileUrl     String?
+  externalUrl String?
+
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  createdByTeacherId String?
+  createdByTeacher   Teacher? @relation(fields: [createdByTeacherId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Assignment {
+  id                       String           @id @default(uuid())
+  lessonId                 String           @unique
+  createdByTeacherId       String
+  title                    String
+  description              String
+  maxScore                 Int
+  status                   AssignmentStatus
+  dueAt                    DateTime?
+  allowMultipleSubmissions Boolean          @default(false)
+
+  lesson           Lesson                 @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  submissions      AssignmentSubmission[]
+  createdByTeacher Teacher                @relation("AssignmentCreatedBy", fields: [createdByTeacherId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AssignmentSubmission {
+  id                String           @id @default(uuid())
+  assignmentId      String
+  studentId         String
+  gradedByTeacherId String?
+  submittedAt       DateTime         @default(now())
+  status            SubmissionStatus
+  score             Int?
+  feedback          String?
+  gradedAt          DateTime?
+
+  assignment      Assignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  student         Student    @relation(fields: [studentId], references: [id])
+  gradedByTeacher Teacher?   @relation("AssignmentGradedBy", fields: [gradedByTeacherId], references: [id])
+
+  attachments Attachment[]
+  comments    Comment[]
+}
+
+model Test {
+  id                 String @id @default(uuid())
+  lessonId           String @unique
+  createdByTeacherId String
+  title              String
+  maxScore           Int
+
+  lesson           Lesson         @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  questions        TestQuestion[]
+  attempts         TestAttempt[]
+  createdByTeacher Teacher        @relation("TestCreatedBy", fields: [createdByTeacherId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TestQuestion {
+  id         String       @id @default(uuid())
+  testId     String
+  orderIndex Int
+  text       String
+  type       QuestionType
+
+  test        Test         @relation(fields: [testId], references: [id], onDelete: Cascade)
+  options     TestOption[]
+  testAnswers TestAnswer[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TestOption {
+  id         String  @id @default(uuid())
+  questionId String
+  text       String
+  isCorrect  Boolean
+
+  question TestQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TestAttempt {
+  id                String    @id @default(uuid())
+  testId            String
+  studentId         String
+  gradedByTeacherId String?
+  startedAt         DateTime  @default(now())
+  finishedAt        DateTime?
+  score             Int?
+
+  test            Test         @relation(fields: [testId], references: [id], onDelete: Cascade)
+  student         Student      @relation(fields: [studentId], references: [id])
+  gradedByTeacher Teacher?     @relation("TestGradedBy", fields: [gradedByTeacherId], references: [id])
+  answers         TestAnswer[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  comments  Comment[]
+}
+
+model TestAnswer {
+  id         String  @id @default(uuid())
+  attemptId  String
+  questionId String
+  optionId   String?
+  textAnswer String?
+
+  attempt  TestAttempt  @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  question TestQuestion @relation(fields: [questionId], references: [id])
+}
+
+model Comment {
+  id                     String   @id @default(uuid())
+  teacherId              String?
+  studentId              String?
+  lessonId               String?
+  assignmentSubmissionId String?
+  testAttemptId          String?
+  text                   String
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+
+  teacher              Teacher?              @relation(fields: [teacherId], references: [id])
+  student              Student?              @relation(fields: [studentId], references: [id])
+  lesson               Lesson?               @relation(fields: [lessonId], references: [id])
+  assignmentSubmission AssignmentSubmission? @relation(fields: [assignmentSubmissionId], references: [id])
+  testAttempt          TestAttempt?          @relation(fields: [testAttemptId], references: [id])
+}
+
+model Attachment {
+  id                  String   @id @default(uuid())
+  url                 String
+  filename            String
+  mimeType            String?
+  uploadedByTeacherId String?
+  uploadedByStudentId String?
+  createdAt           DateTime @default(now())
+
+  uploadedByTeacher      Teacher?              @relation(fields: [uploadedByTeacherId], references: [id])
+  uploadedByStudent      Student?              @relation(fields: [uploadedByStudentId], references: [id])
+  assignmentSubmission   AssignmentSubmission? @relation(fields: [assignmentSubmissionId], references: [id])
+  assignmentSubmissionId String?
+
+  @@index([uploadedByTeacherId])
+  @@index([uploadedByStudentId])
+}
+
+enum LessonType {
+  VIDEO
+  ARTICLE
+  TEST
+  ASSIGNMENT
+}
+
+enum MaterialType {
+  FILE
+  LINK
+}
+
+enum AssignmentStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum SubmissionStatus {
+  PENDING
+  GRADED
+  NEEDS_REVISION
+}
+
+enum QuestionType {
+  SINGLE_CHOICE
+  MULTIPLE_CHOICE
+  TEXT
+}
