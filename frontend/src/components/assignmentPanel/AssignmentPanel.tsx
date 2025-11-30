@@ -10,7 +10,7 @@ interface AssignmentPanelProps {
 const getStatusBadge = (status: string) => {
   switch (status) {
     case 'PENDING':
-      return { text: 'Не сдано', color: s.statusPending }
+      return { text: 'Сдано', color: s.statusPending }
     case 'GRADED':
       return { text: 'Проверено', color: s.statusGraded }
     case 'NEEDS_REVISION':
