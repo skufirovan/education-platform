@@ -94,6 +94,10 @@ education-platform/
 - `GET /api/courses/:id` – курс с полной структурой (модули, уроки, материалы)
 - `PATCH /api/submissions/:submissionId/grade` – выставление оценки за работу
 
+## Демо
+
+[Пример работы приложения](https://drive.google.com/file/d/1NaQR7jM6vgKG6o-FBo5Ty9xvK4M-YoPO/view?usp=sharing)
+
 ## Запуск проекта
 
 ```bash
