@@ -5,7 +5,7 @@ export const RootLayout = () => {
   return (
     <>
       <Header />
-      <main>
+      <main style={{ backgroundColor: '#f8f9fa', minWidth: '1280px' }}>
         <Outlet />
       </main>
     </>

@@ -1,23 +1,44 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useTeacherCoursesStore } from '@/shared/store/courses'
 import { CourseHeader } from '@/components/courseHeader/CourseHeader'
 import { ModulesList } from '@/components/modulesList/ModulesList'
 import { LessonContent } from '@/components/lessonContent/LessonContent'
-import type { Lesson } from '@/shared/types'
+import type { Course, Lesson } from '@/shared/types'
 import s from './coursePage.module.css'
 
 export const CoursePage = () => {
   const { id } = useParams<{ id: string }>()
-  const { courses } = useTeacherCoursesStore()
 
-  const course = useMemo(() => courses.find(c => c.id === id), [courses, id])
-
+  const [course, setCourse] = useState<Course | null>(null)
+  const [loading, setLoading] = useState(true)
   const [selectedLessonId, setSelectedLessonId] = useState<string | null>(null)
+
+  // загружаем курс при монтировании компонента
+  useEffect(() => {
+    const fetchCourse = async () => {
+      try {
+        const res = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/courses/${id}`
+        )
+        if (!res.ok) throw new Error('Курс не найден')
+        const data = await res.json()
+        setCourse(data)
+      } catch (e) {
+        console.error('Ошибка загрузки курса:', e)
+        setCourse(null)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    if (id) {
+      fetchCourse()
+    }
+  }, [id])
 
   // при заходе на курс выбираем первый урок первого модуля
   useEffect(() => {
-    if (!course) return
+    if (!course || course.modules.length === 0) return
 
     const firstModuleWithLessons = course.modules.find(
       m => m.lessons.length > 0
@@ -26,6 +47,10 @@ export const CoursePage = () => {
 
     setSelectedLessonId(firstLesson ? firstLesson.id : null)
   }, [course])
+
+  if (loading) {
+    return <div className={s.page}>Загрузка курса...</div>
+  }
 
   if (!course) {
     return <div className={s.page}>Курс не найден</div>
@@ -50,7 +75,7 @@ export const CoursePage = () => {
 
         {/* ПРАВАЯ КОЛОНКА: текущий урок */}
         <section className={s.contentCard}>
-          <LessonContent lesson={currentLesson} />
+          <LessonContent lesson={currentLesson} courseId={id} />
         </section>
       </div>
     </div>

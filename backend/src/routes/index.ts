@@ -4,6 +4,7 @@ import {
   CourseController,
   ModuleController,
   LessonController,
+  AssignmentSubmissionController,
 } from "../controllers";
 
 const router = Router();
@@ -60,6 +61,13 @@ router.patch("/lessons/:id", (req, res) =>
 );
 router.delete("/lessons/:id", (req, res) =>
   LessonController.deleteLesson(req, res)
+);
+
+router.get("/submissions/:submissionId", (req, res) =>
+  AssignmentSubmissionController.getSubmission(req, res)
+);
+router.patch("/submissions/:submissionId/grade", (req, res) =>
+  AssignmentSubmissionController.gradeSubmission(req, res)
 );
 
 export default router;

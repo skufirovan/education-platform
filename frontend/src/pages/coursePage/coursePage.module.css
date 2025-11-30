@@ -2,7 +2,6 @@
   box-sizing: border-box;
   min-height: calc(100vh - 73px); /* под шапку */
   padding: 24px 32px;
-  background: #f3f4f6;
 }
 
 .layout {

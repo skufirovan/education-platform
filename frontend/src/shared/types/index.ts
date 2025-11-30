@@ -30,6 +30,7 @@ export interface Lesson {
   orderIndex: number
   durationMinutes?: number
   materials: LessonMaterial[]
+  assignment?: Assignment | null
 }
 
 export interface LessonMaterial {
@@ -45,6 +46,38 @@ export interface Attachment {
   url: string
   filename: string
   mimeType?: string | null
+}
+
+export interface Assignment {
+  id: string
+  lessonId: string
+  title: string
+  description: string
+  maxScore: number
+  status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'
+  dueAt?: string | null
+  allowMultipleSubmissions: boolean
+  submissions?: AssignmentSubmission[]
+  createdAt: string
+  updatedAt: string
+}
+
+export interface AssignmentSubmission {
+  id: string
+  assignmentId: string
+  studentId: string
+  submittedAt: string
+  status: 'PENDING' | 'GRADED' | 'NEEDS_REVISION'
+  score?: number | null
+  feedback?: string | null
+  gradedAt?: string | null
+  student?: Student
+}
+
+export interface Student {
+  id: string
+  fullName: string
+  email: string
 }
 
 interface CourseEnrollment {

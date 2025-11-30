@@ -1,12 +1,14 @@
 import type { Lesson } from '@/shared/types'
 import { LessonMaterials } from '@/components/lessonMaterials/LessonMaterials'
+import { AssignmentPanel } from '@/components/assignmentPanel/AssignmentPanel'
 import s from './lessonContent.module.css'
 
 interface LessonContentProps {
   lesson: Lesson | null
+  courseId?: string
 }
 
-export const LessonContent = ({ lesson }: LessonContentProps) => {
+export const LessonContent = ({ lesson, courseId }: LessonContentProps) => {
   if (!lesson) {
     return <p className={s.emptyLesson}>В этом курсе ещё нет уроков.</p>
   }
@@ -49,7 +51,11 @@ export const LessonContent = ({ lesson }: LessonContentProps) => {
         </div>
       </header>
 
-      <LessonMaterials lesson={lesson} />
+      {lesson.assignment ? (
+        <AssignmentPanel assignment={lesson.assignment} courseId={courseId} />
+      ) : (
+        <LessonMaterials lesson={lesson} />
+      )}
     </>
   )
 }

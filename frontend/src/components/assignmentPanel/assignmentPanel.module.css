@@ -1,0 +1,205 @@
+.assignmentPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sectionTitle {
+  margin: 0 0 4px;
+  color: #1f2937;
+  font:
+    600 18px/28px 'Inter',
+    sans-serif;
+}
+
+/* Описание задания */
+
+.assignmentInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font:
+    400 16px/24px 'Inter',
+    sans-serif;
+}
+
+.infoBlock {
+  padding: 16px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+}
+
+.assignmentDescription {
+  margin: 0 0 12px;
+  color: #6b7280;
+}
+
+.assignmentMeta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.metaItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.metaLabel {
+  text-transform: uppercase;
+}
+
+.metaValue {
+  color: #6b7280;
+}
+
+.draft {
+  color: #92400e;
+}
+
+.published {
+  color: #15803d;
+}
+
+.archived {
+  color: #7c3aed;
+}
+
+/* Работы студентов */
+
+.submissionsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.noSubmissions {
+  margin: 0;
+  padding: 16px;
+  color: #6b7280;
+  font:
+    400 16px/24px 'Inter',
+    sans-serif;
+  text-align: center;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.submissionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.submissionRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  transition: all 0.12s ease;
+}
+
+.submissionRow:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.studentInfo {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.studentName {
+  color: #1f2937;
+  font:
+    500 16px/24px 'Inter',
+    sans-serif;
+}
+
+.submittedAt {
+  color: #6b7280;
+  font:
+    400 14px/20px 'Inter',
+    sans-serif;
+}
+
+.submissionStatus {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8px;
+}
+
+.statusBadge {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 10px;
+  color: #ffffff;
+  font:
+    500 12px/16px 'Inter',
+    sans-serif;
+  white-space: nowrap;
+  text-transform: uppercase;
+  border-radius: 50px;
+}
+
+.statusPending {
+  color: #78350f;
+  background: #fcd34d;
+}
+
+.statusGraded {
+  color: #1b4332;
+  background: #86efac;
+}
+
+.statusRevision {
+  color: #7f1d1d;
+  background: #f87171;
+}
+
+.scoreText {
+  color: #1f2937;
+  font:
+    500 14px/20px 'Inter',
+    sans-serif;
+  white-space: nowrap;
+}
+
+.reviewButton {
+  display: inline-flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+  color: white;
+  font:
+    500 14px/20px 'Inter',
+    sans-serif;
+  white-space: nowrap;
+  text-decoration: none;
+  background: #6b46c1;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.reviewButton:hover {
+  background: #5833aa;
+}
+
+.reviewButton:active {
+  transform: scale(0.95);
+}

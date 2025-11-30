@@ -5,6 +5,7 @@ import { useCurrentUserStore } from '@/shared/store/currentUser'
 import { RootLayout } from './layouts/rootLayout/RootLayout'
 import { CoursesPage } from './pages/coursesPage/CoursesPage'
 import { CoursePage } from './pages/coursePage/CoursePage'
+import { GradePage } from './pages/gradePage/GradePage'
 
 export const App = () => {
   const { user, isLoading, error, fetchMe } = useCurrentUserStore()
@@ -32,6 +33,10 @@ export const App = () => {
         <Route index element={<Navigate to='/courses' />} />
         <Route path='/courses' element={<CoursesPage />} />
         <Route path='/courses/:id' element={<CoursePage />} />
+        <Route
+          path='/courses/:courseId/assignments/:assignmentId/submissions/:submissionId/grade'
+          element={<GradePage />}
+        />
       </Route>
     </Routes>
   )
