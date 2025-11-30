@@ -107,15 +107,28 @@ export const AssignmentPanel = ({
                       )}
                   </div>
 
-                  {submission.status === 'PENDING' && (
-                    <Link
-                      to={`/courses/${courseId}/assignments/${assignment.id}/submissions/${submission.id}/grade`}
-                      state={{ assignment }}
-                      className={s.reviewButton}
-                    >
-                      Оценить
-                    </Link>
-                  )}
+                  <div className={s.submissionActions}>
+                    {submission.status === 'PENDING' && (
+                      <Link
+                        to={`/courses/${courseId}/assignments/${assignment.id}/submissions/${submission.id}/grade`}
+                        state={{ assignment }}
+                        className={s.reviewButton}
+                      >
+                        Оценить
+                      </Link>
+                    )}
+
+                    {(submission.status === 'GRADED' ||
+                      submission.status === 'NEEDS_REVISION') && (
+                      <Link
+                        to={`/courses/${courseId}/assignments/${assignment.id}/submissions/${submission.id}/grade`}
+                        state={{ assignment }}
+                        className={s.reviewButton}
+                      >
+                        Посмотреть
+                      </Link>
+                    )}
+                  </div>
                 </div>
               )
             })}

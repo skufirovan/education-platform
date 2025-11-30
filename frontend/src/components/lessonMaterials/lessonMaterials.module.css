@@ -75,12 +75,15 @@
   flex-shrink: 0;
   justify-content: center;
   align-items: center;
-  margin-left: 8px;
   padding: 8px 10px;
   color: white;
+  font:
+    500 14px/20px 'Inter',
+    sans-serif;
   white-space: nowrap;
   text-decoration: none;
   background: #6b46c1;
+  border: none;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.12s ease;
@@ -90,9 +93,178 @@
   background: #5833aa;
 }
 
+.materialActions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 8px;
+  margin-left: 8px;
+}
+
+.deleteButton {
+  display: inline-flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 10px;
+  color: white;
+  font:
+    500 14px/20px 'Inter',
+    sans-serif;
+  white-space: nowrap;
+  text-decoration: none;
+  background: #dc2626;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.deleteButton:hover {
+  background: #b91c1c;
+}
+
 .uploadTitle {
   margin: 0;
   font:
     400 16px/24px 'Inter',
     sans-serif;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(0 0 0 / 50%);
+}
+
+.modal {
+  width: 90%;
+  max-width: 500px;
+  padding: 24px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgb(0 0 0 / 15%);
+  animation: slideIn 0.2s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modalTitle {
+  margin: 0 0 20px;
+  color: #1f2937;
+  font:
+    600 20px/28px 'Inter',
+    sans-serif;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.label {
+  color: #374151;
+  font:
+    500 14px/20px 'Inter',
+    sans-serif;
+}
+
+.input {
+  padding: 10px 12px;
+  color: #1f2937;
+  font:
+    400 14px/20px 'Inter',
+    sans-serif;
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  transition: all 0.12s ease;
+}
+
+.input:focus {
+  border-color: #6b46c1;
+  outline: none;
+  box-shadow: 0 0 0 3px rgb(107 70 193 / 10%);
+}
+
+.input::placeholder {
+  color: #9ca3af;
+}
+
+.error {
+  margin-bottom: 12px;
+  padding: 8px;
+  color: #dc2626;
+  font:
+    400 14px/20px 'Inter',
+    sans-serif;
+  background: #fee2e2;
+  border-radius: 4px;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.cancelButton {
+  padding: 10px 16px;
+  color: #374151;
+  font:
+    500 14px/20px 'Inter',
+    sans-serif;
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.cancelButton:hover:not(:disabled) {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.cancelButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.addButton {
+  padding: 10px 16px;
+  color: white;
+  font:
+    500 14px/20px 'Inter',
+    sans-serif;
+  background: #6b46c1;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.addButton:hover:not(:disabled) {
+  background: #5833aa;
+}
+
+.addButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }

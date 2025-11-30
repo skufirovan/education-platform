@@ -203,3 +203,9 @@
 .reviewButton:active {
   transform: scale(0.95);
 }
+
+.submissionActions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 8px;
+}

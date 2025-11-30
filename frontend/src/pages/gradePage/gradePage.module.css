@@ -6,7 +6,7 @@
 }
 
 .backButton {
-  margin-bottom: 20px;
+  margin: 0;
   padding: 8px 16px;
   color: #6b46c1;
   font:
@@ -151,6 +151,35 @@
   font:
     600 16px/24px 'Inter',
     sans-serif;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.cardHeader .cardTitle {
+  margin: 0;
+}
+
+.editToggleButton {
+  padding: 8px 12px;
+  color: #6b46c1;
+  font:
+    500 13px/18px 'Inter',
+    sans-serif;
+  background: #f3e8ff;
+  border: 1px solid #e9d5ff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.editToggleButton:hover {
+  background: #ede9fe;
+  border-color: #ddd6fe;
 }
 
 /* Информация о студенте */
@@ -299,6 +328,17 @@
   box-shadow: 0 0 0 3px rgb(124 58 237 / 10%);
 }
 
+.input:disabled {
+  color: #6b7280;
+  background: #f3f4f6;
+  border-color: #e5e7eb;
+  cursor: not-allowed;
+}
+
+.input:disabled::placeholder {
+  color: #9ca3af;
+}
+
 .maxScore {
   color: #6b7280;
   font:
@@ -325,6 +365,13 @@
   border-color: #7c3aed;
   outline: none;
   box-shadow: 0 0 0 3px rgb(124 58 237 / 10%);
+}
+
+.textarea:disabled {
+  color: #6b7280;
+  background: #f3f4f6;
+  border-color: #e5e7eb;
+  cursor: not-allowed;
 }
 
 .textarea::placeholder {

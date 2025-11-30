@@ -51,4 +51,33 @@ export class LessonController {
       res.status(500).json({ error: "internal" });
     }
   }
+
+  static async addMaterial(req: Request, res: Response) {
+    try {
+      const material = await LessonService.addMaterial(
+        req.params.lessonId,
+        req.body
+      );
+      res.status(201).json(material);
+    } catch (err: any) {
+      console.error(err);
+      if (err.message.includes("not found"))
+        return res.status(404).json({ error: err.message });
+      if (err.message.includes("invalid"))
+        return res.status(400).json({ error: err.message });
+      res.status(500).json({ error: "internal" });
+    }
+  }
+
+  static async deleteMaterial(req: Request, res: Response) {
+    try {
+      await LessonService.deleteMaterial(req.params.materialId);
+      res.status(204).send();
+    } catch (err: any) {
+      console.error(err);
+      if (err.message.includes("not found"))
+        return res.status(404).json({ error: err.message });
+      res.status(500).json({ error: "internal" });
+    }
+  }
 }

@@ -62,6 +62,12 @@ router.patch("/lessons/:id", (req, res) =>
 router.delete("/lessons/:id", (req, res) =>
   LessonController.deleteLesson(req, res)
 );
+router.post("/lessons/:lessonId/materials", (req, res) =>
+  LessonController.addMaterial(req, res)
+);
+router.delete("/materials/:materialId", (req, res) =>
+  LessonController.deleteMaterial(req, res)
+);
 
 router.get("/submissions/:submissionId", (req, res) =>
   AssignmentSubmissionController.getSubmission(req, res)

@@ -76,7 +76,7 @@ export const CourseCard = ({
           className={s.fullWidthButton}
           onClick={() => onCheckAssignments?.(course.id)}
         >
-          Проверить работы
+          Редактировать
         </Button>
       </div>
     </article>

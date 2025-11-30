@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import type { Assignment, AssignmentSubmission } from '@/shared/types'
 import s from './gradePage.module.css'
@@ -23,6 +23,14 @@ export const GradePage = () => {
   const submission = assignment?.submissions?.find(
     s => s.id === submissionId
   ) as AssignmentSubmission | undefined
+
+  // Инициализация формы с данными если они уже есть
+  useEffect(() => {
+    if (submission?.score !== null && submission?.score !== undefined) {
+      setScore(submission.score)
+      setFeedback(submission.feedback || '')
+    }
+  }, [submission])
 
   if (!assignment || !submission) {
     return (
@@ -156,7 +164,11 @@ export const GradePage = () => {
 
           {/* Оценивание работы */}
           <div className={s.card}>
-            <h2 className={s.cardTitle}>Оценивание работы</h2>
+            <h2 className={s.cardTitle}>
+              {submission.status === 'PENDING'
+                ? 'Оценивание работы'
+                : 'Оценка и комментарии'}
+            </h2>
 
             <div className={s.gradeForm}>
               <div className={s.formGroup}>
@@ -177,6 +189,7 @@ export const GradePage = () => {
                     }
                     placeholder='0'
                     className={s.input}
+                    disabled={false}
                   />
                   <span className={s.maxScore}>/ {assignment.maxScore}</span>
                 </div>
@@ -192,6 +205,7 @@ export const GradePage = () => {
                   onChange={e => setFeedback(e.target.value)}
                   className={s.textarea}
                   rows={8}
+                  disabled={false}
                 />
               </div>
 

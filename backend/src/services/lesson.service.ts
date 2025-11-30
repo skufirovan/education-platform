@@ -55,4 +55,47 @@ export class LessonService {
       where: { id },
     });
   }
+
+  static async addMaterial(
+    lessonId: string,
+    data: {
+      title: string;
+      type: "FILE" | "LINK";
+      url: string;
+      filename: string;
+      mimeType?: string;
+    }
+  ) {
+    const lesson = await prisma.lesson.findUnique({ where: { id: lessonId } });
+    if (!lesson) throw new Error("lesson not found");
+
+    return prisma.lessonMaterial.create({
+      data: {
+        lessonId,
+        title: data.title,
+        type: data.type,
+        attachment: {
+          create: {
+            url: data.url,
+            filename: data.filename,
+            mimeType: data.mimeType || null,
+          },
+        },
+      },
+      include: {
+        attachment: true,
+      },
+    });
+  }
+
+  static async deleteMaterial(materialId: string) {
+    const material = await prisma.lessonMaterial.findUnique({
+      where: { id: materialId },
+    });
+    if (!material) throw new Error("material not found");
+
+    return prisma.lessonMaterial.delete({
+      where: { id: materialId },
+    });
+  }
 }
